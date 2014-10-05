@@ -1,0 +1,20 @@
+language: scala
+
+scala:
+  - 2.10.4
+  - 2.11.2
+
+jdk:
+  - oraclejdk7
+  - oraclejdk8
+
+script:
+  - git config core.whitespace tab-in-indent,trailing-space,space-before-tab,cr-at-eol
+  - git show --oneline --check
+  - sbt ++${TRAVIS_SCALA_VERSION} test $(if [[ "${TRAVIS_PULL_REQUEST}" == "false" && ${JAVA_HOME} == $(jdk_switcher home oraclejdk7) && "${TRAVIS_BRANCH}" == "master" ]]; then echo "publish"; fi)
+
+env:
+  global:
+    - secure: "RfoZnq8VbM+4D0triWeFWsIAaFai4M36oj850iBx6xaKYXsxtoJk0CE+pBej4XaV+9TuAn+7VG5pC3temLQNZ/n18U99jLnwf4KI4j9XRdXhRsFZ2t92ycGLk73HKli25n16+zq27+tRFqaJEqcw3mJJs7JZ9iUMO110e2VAo3w="
+    - secure: "Dkjvy5ZwkMyD5GCZ+1skuUltiR0zo+D5D3c/0B7CF/t+EKML4eHG+5iKSg3QEpSzwyuZw4B5FejZMQhK/D+V8VzQIRVs3+2oVnMv9WJANAC043dk8QJHMCX3/pHuuX0Mp3RiYYhPV9nof7OHIznwtb5XwLoLKUU7qVSjPNzbtPg="
+    - secure: "HrCQgW4msT6VVyED7QF0kea1Nu3N7wlii/W6bEyap1aCR/PbbDFtd2rXH6XDaLjzr2uLbA1uP4UUCUXECahzNW6xSeTemM1t82NwqpAQ6tiqiGGTyIbY3I02XgMUj8VQ5S5XKlqXIgQ9DDxMLUYFULLO7qMITkFRJ6gCXgN+kgQ="
