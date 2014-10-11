@@ -8,7 +8,7 @@ final case class User(
   url : String,
   avatarUrlMedium: String,
   username: String,
-  invited: Boolean,
+  invited: Option[Boolean],
   v: Int,
   id: String,
   avatarUrlSmall: String

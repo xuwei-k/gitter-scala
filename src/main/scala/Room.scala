@@ -14,7 +14,7 @@ final case class Room (
   lurk: Boolean,
   noindex: Boolean,
   premium: Boolean,
-  lastAccessTime: String, // TODO DateTime,
+  lastAccessTime: Option[String], // TODO DateTime,
   oneToOne: Boolean,
   unreadItems: Long,
   topic: String,
@@ -49,7 +49,7 @@ object Room {
     url: String,
     avatarUrlMedium: String,
     username: String,
-    invited: Boolean,
+    invited: Option[Boolean],
     id: String,
     avatarUrlSmall: String,
     v: Option[Int]
