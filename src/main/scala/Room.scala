@@ -7,7 +7,7 @@ final case class Room (
   name: String,
   security: Option[String],
   url: String,
-  uri: String,
+  uri: Option[String],
   mentions: Long,
   v: Option[Long],
   id: String,
