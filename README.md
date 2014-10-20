@@ -10,7 +10,7 @@
 ### latest stable version
 
 ```scala
-libraryDependencies += "com.github.xuwei-k" %% "gitter-scala" % "0.1.0"
+libraryDependencies += "com.github.xuwei-k" %% "gitter-scala" % "0.1.1"
 ```
 
 ### snapshot version
