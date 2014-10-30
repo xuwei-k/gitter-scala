@@ -102,7 +102,7 @@ object build extends Build {
       else
         Nil
     },
-    scalaVersion := "2.11.2",
+    scalaVersion := "2.11.4",
     crossScalaVersions := scalaVersion.value :: "2.10.4" :: Nil,
     scalacOptions in (Compile, doc) ++= {
       val tag = if(isSnapshot.value) gitHash.getOrElse("master") else { "v" + version.value }
@@ -138,7 +138,7 @@ object build extends Build {
     }
   )
 
-  private final val httpzVersion = "0.2.13"
+  private final val httpzVersion = "0.2.14"
 
   lazy val gitterScala = Project("gitterScala", file(".")).settings(
     baseSettings : _*
