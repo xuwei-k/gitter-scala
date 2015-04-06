@@ -13,7 +13,7 @@ final case class Room (
   id: String,
   lurk: Boolean,
   noindex: Boolean,
-  premium: Boolean,
+  premium: Option[Boolean],
   lastAccessTime: Option[String], // TODO DateTime,
   oneToOne: Boolean,
   unreadItems: Long,
