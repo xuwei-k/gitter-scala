@@ -150,7 +150,7 @@ object build extends Build {
     libraryDependencies ++= Seq(
       "com.github.xuwei-k" %% "httpz" % httpzVersion,
       "com.github.xuwei-k" %% "httpz-native" % httpzVersion % "test",
-      "org.scalaz" %% "scalaz-scalacheck-binding" % "7.1.1" % "test"
+      "org.scalaz" %% "scalaz-scalacheck-binding" % "7.1.3" % "test"
     )
   )
 
