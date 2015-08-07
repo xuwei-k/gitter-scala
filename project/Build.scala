@@ -138,7 +138,7 @@ object build extends Build {
     }
   )
 
-  private final val httpzVersion = "0.2.18"
+  private final val httpzVersion = "0.2.19"
 
   lazy val gitterScala = Project("gitterScala", file(".")).settings(
     baseSettings : _*
