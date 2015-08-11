@@ -1,11 +1,12 @@
 import com.typesafe.sbt.pgp.PgpKeys
 import sbt._
 import sbt.Keys._
-import sbtbuildinfo.Plugin._
 import sbtrelease._
 import sbtrelease.ReleasePlugin.autoImport._
 import ReleaseStateTransformations._
 import xerial.sbt.Sonatype._
+import sbtbuildinfo._
+import sbtbuildinfo.BuildInfoKeys._
 
 object build extends Build {
 
@@ -46,7 +47,7 @@ object build extends Build {
 
   val updateReadmeProcess: ReleaseStep = updateReadme
 
-  val baseSettings = sonatypeSettings ++ buildInfoSettings ++ Seq(
+  val baseSettings = sonatypeSettings ++ Seq(
     commands += Command.command("updateReadme")(updateReadme),
     resolvers += Opts.resolver.sonatypeSnapshots,
     releaseProcess := Seq[ReleaseStep](
@@ -68,7 +69,6 @@ object build extends Build {
       updateReadmeProcess,
       pushChanges
     ),
-    sourceGenerators in Compile <+= buildInfo,
     buildInfoKeys := Seq[BuildInfoKey](
       organization,
       name,
@@ -153,6 +153,6 @@ object build extends Build {
       "com.github.xuwei-k" %% "httpz-native" % httpzVersion % "test",
       "org.scalaz" %% "scalaz-scalacheck-binding" % "7.1.3" % "test"
     )
-  )
+  ).enablePlugins(BuildInfoPlugin)
 
 }
