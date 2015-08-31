@@ -22,7 +22,7 @@ abstract class GitterSpec[A](command: Command[A], name: String) extends Properti
     println(result)
     result.leftMap(_.fold(
       println,
-      println,
+      (res, error) => println((res, error)),
       (_, error, history, _) => println((error, history)))
     )
     result.isRight

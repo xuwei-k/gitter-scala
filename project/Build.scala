@@ -142,7 +142,7 @@ object build extends Build {
     scalacOptions in (c, console) ~= {_.filterNot(unusedWarnings.toSet)}
   )
 
-  private final val httpzVersion = "0.2.19"
+  private final val httpzVersion = "0.3.0"
 
   lazy val gitterScala = Project("gitterScala", file(".")).settings(
     baseSettings : _*
