@@ -1,4 +1,3 @@
-import argonaut._
 import httpz.Action
 import scalaz._
 
