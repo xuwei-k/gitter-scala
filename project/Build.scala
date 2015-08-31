@@ -47,6 +47,8 @@ object build extends Build {
 
   val updateReadmeProcess: ReleaseStep = updateReadme
 
+  private[this] val unusedWarnings = Seq("-Ywarn-unused", "-Ywarn-unused-import")
+
   val baseSettings = sonatypeSettings ++ Seq(
     commands += Command.command("updateReadme")(updateReadme),
     resolvers += Opts.resolver.sonatypeSnapshots,
@@ -99,12 +101,9 @@ object build extends Build {
       "-language:implicitConversions" ::
       Nil
     ),
-    scalacOptions in compile ++= {
-      if(scalaVersion.value.startsWith("2.11"))
-        Seq("-Ywarn-unused", "-Ywarn-unused-import")
-      else
-        Nil
-    },
+    scalacOptions ++= PartialFunction.condOpt(CrossVersion.partialVersion(scalaVersion.value)){
+      case Some((2, v)) if v >= 11 => unusedWarnings
+    }.toList.flatten,
     scalaVersion := Scala211,
     crossScalaVersions := Scala211 :: "2.10.5" :: Nil,
     scalacOptions in (Compile, doc) ++= {
@@ -139,6 +138,8 @@ object build extends Build {
       val stripTestScope = stripIf { n => n.label == "dependency" && (n \ "scope").text == "test" }
       new RuleTransformer(stripTestScope).transform(node)(0)
     }
+  ) ++ Seq(Compile, Test).flatMap(c =>
+    scalacOptions in (c, console) ~= {_.filterNot(unusedWarnings.toSet)}
   )
 
   private final val httpzVersion = "0.2.19"
