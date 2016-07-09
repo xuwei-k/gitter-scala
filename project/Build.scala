@@ -142,7 +142,7 @@ object build extends Build {
     scalacOptions in (c, console) ~= {_.filterNot(unusedWarnings.toSet)}
   )
 
-  private final val httpzVersion = "0.3.0"
+  private final val httpzVersion = "0.4.0"
 
   lazy val gitterScala = Project("gitterScala", file(".")).settings(
     baseSettings : _*
@@ -152,7 +152,7 @@ object build extends Build {
     libraryDependencies ++= Seq(
       "com.github.xuwei-k" %% "httpz" % httpzVersion,
       "com.github.xuwei-k" %% "httpz-native" % httpzVersion % "test",
-      "org.scalaz" %% "scalaz-scalacheck-binding" % "7.1.3" % "test"
+      "org.scalaz" %% "scalaz-scalacheck-binding" % "7.2.4" % "test"
     )
   ).enablePlugins(BuildInfoPlugin)
 
