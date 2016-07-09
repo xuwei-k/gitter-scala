@@ -16,7 +16,7 @@ object build extends Build {
 
   val sonatypeURL = "https://oss.sonatype.org/service/local/repositories/"
 
-  private[this] val Scala211 = "2.11.7"
+  private[this] val Scala211 = "2.11.8"
 
   val updateReadme = { state: State =>
     val extracted = Project.extract(state)
@@ -105,7 +105,7 @@ object build extends Build {
       case Some((2, v)) if v >= 11 => unusedWarnings
     }.toList.flatten,
     scalaVersion := Scala211,
-    crossScalaVersions := Scala211 :: "2.10.5" :: Nil,
+    crossScalaVersions := Scala211 :: "2.10.6" :: Nil,
     scalacOptions in (Compile, doc) ++= {
       val tag = if(isSnapshot.value) gitHash.getOrElse("master") else { "v" + version.value }
       Seq(
