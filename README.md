@@ -18,5 +18,5 @@ libraryDependencies += "com.github.xuwei-k" %% "gitter-scala" % "0.2.0"
 ```scala
 resolvers += Opts.resolver.sonatypeSnapshots
 
-libraryDependencies += "com.github.xuwei-k" %% "gitter-scala" % "0.1.5-SNAPSHOT"
+libraryDependencies += "com.github.xuwei-k" %% "gitter-scala" % "0.2.1-SNAPSHOT"
 ```
