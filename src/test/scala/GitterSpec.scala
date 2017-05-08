@@ -32,7 +32,7 @@ abstract class GitterSpec[A](command: Command[A], name: String) extends Properti
 object UserSpec extends GitterSpec(Command.User, "user")
 object RoomsSpec extends GitterSpec(Command.Rooms, "rooms")
 object RoomUsersSpec extends GitterSpec(Command.RoomUsers(GitterSpec.scalajpRoomId), "roomUsers")
-object ChannelsSpec extends GitterSpec(Command.Channels(GitterSpec.scalajpRoomId), "channels")
+//object ChannelsSpec extends GitterSpec(Command.Channels(GitterSpec.scalajpRoomId), "channels")
 object MessagesSpec extends GitterSpec(Command.Messages(GitterSpec.scalajpRoomId, None, None), "messages")
 
 // TODO sendMessages, updateMessages
