@@ -8,7 +8,7 @@ import xerial.sbt.Sonatype._
 import sbtbuildinfo._
 import sbtbuildinfo.BuildInfoKeys._
 
-object build extends Build {
+object build {
 
   def gitHash: Option[String] = scala.util.Try(
     sys.process.Process("git rev-parse HEAD").lines_!.head
@@ -142,19 +142,6 @@ object build extends Build {
     scalacOptions in (c, console) ~= {_.filterNot(unusedWarnings.toSet)}
   )
 
-  private final val httpzVersion = "0.5.1"
-
-  lazy val gitterScala = Project("gitterScala", file(".")).settings(
-    baseSettings : _*
-  ).settings(
-    name := "gitter-scala",
-    description := "purely functional scala gitter api client",
-    libraryDependencies ++= Seq(
-      "io.argonaut" %% "argonaut-scalaz" % "6.2",
-      "com.github.xuwei-k" %% "httpz" % httpzVersion,
-      "com.github.xuwei-k" %% "httpz-native" % httpzVersion % "test",
-      "org.scalaz" %% "scalaz-scalacheck-binding" % "7.2.12" % "test"
-    )
-  ).enablePlugins(BuildInfoPlugin)
+  def httpzVersion = "0.5.1"
 
 }
