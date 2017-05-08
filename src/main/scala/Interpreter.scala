@@ -2,6 +2,7 @@ package gitter
 
 import httpz.{Core, Request}
 import scalaz.IList
+import argonaut.ArgonautScalaz._
 
 private[gitter] object Interpreter extends CommandToAction {
   override def apply[A](fa: Command[A]) = fa match {

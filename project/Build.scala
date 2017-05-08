@@ -16,7 +16,7 @@ object build extends Build {
 
   val sonatypeURL = "https://oss.sonatype.org/service/local/repositories/"
 
-  private[this] val Scala211 = "2.11.8"
+  private[this] val Scala211 = "2.11.11"
 
   val updateReadme = { state: State =>
     val extracted = Project.extract(state)
@@ -40,7 +40,7 @@ object build extends Build {
     IO.write(readmeFile, newReadme)
     val git = new Git(extracted get baseDirectory)
     git.add(readme) ! state.log
-    git.commit("update " + readme) ! state.log
+    git.commit(message = "update " + readme, sign = false) ! state.log
     "git diff HEAD^" ! state.log
     state
   }
@@ -67,7 +67,7 @@ object build extends Build {
       ),
       setNextVersion,
       commitNextVersion,
-      ReleaseStep(state => Project.extract(state).runTask(SonatypeKeys.sonatypeReleaseAll, state)._1),
+      releaseStepCommand("sonatypeReleaseAll"),
       updateReadmeProcess,
       pushChanges
     ),
@@ -105,7 +105,7 @@ object build extends Build {
       case Some((2, v)) if v >= 11 => unusedWarnings
     }.toList.flatten,
     scalaVersion := Scala211,
-    crossScalaVersions := Scala211 :: "2.10.6" :: Nil,
+    crossScalaVersions := "2.12.2" :: Scala211 :: "2.10.6" :: Nil,
     scalacOptions in (Compile, doc) ++= {
       val tag = if(isSnapshot.value) gitHash.getOrElse("master") else { "v" + version.value }
       Seq(
@@ -142,7 +142,7 @@ object build extends Build {
     scalacOptions in (c, console) ~= {_.filterNot(unusedWarnings.toSet)}
   )
 
-  private final val httpzVersion = "0.4.0"
+  private final val httpzVersion = "0.5.1"
 
   lazy val gitterScala = Project("gitterScala", file(".")).settings(
     baseSettings : _*
@@ -150,9 +150,10 @@ object build extends Build {
     name := "gitter-scala",
     description := "purely functional scala gitter api client",
     libraryDependencies ++= Seq(
+      "io.argonaut" %% "argonaut-scalaz" % "6.2",
       "com.github.xuwei-k" %% "httpz" % httpzVersion,
       "com.github.xuwei-k" %% "httpz-native" % httpzVersion % "test",
-      "org.scalaz" %% "scalaz-scalacheck-binding" % "7.2.4" % "test"
+      "org.scalaz" %% "scalaz-scalacheck-binding" % "7.2.12" % "test"
     )
   ).enablePlugins(BuildInfoPlugin)
 

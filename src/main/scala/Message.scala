@@ -1,6 +1,7 @@
 package gitter
 
 import argonaut.{CodecJson, Json}
+import argonaut.ArgonautScalaz._
 import gitter.Message.{Issue, Mention}
 import httpz.JsonToString
 import scalaz.IList
